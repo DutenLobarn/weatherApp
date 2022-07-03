@@ -1,4 +1,4 @@
-This test will assess your abilities in React, modern JavaScript, Node.js and interacting with an API. If you are able to, utilize typescript. Try to ensure a reasonable level of error handling.
+- This test will assess your abilities in React, modern JavaScript, Node.js and interacting with an API. If you are able to, utilize typescript. Try to ensure a reasonable level of error handling.
 
 Create a Node.js webservice that fetches, caches and serves a weather forecast for the Royal Palace in Stockholm. I recommend using SMHI. Discard all superfluous information; information not displayed by the frontend.
 
@@ -10,7 +10,16 @@ Implement routing in your SPA. A user should be able to bookmark a given day, an
 
 Your assignment should be pushed to GitHub or an equivalent publicly accessible git service, and the link to the repository (and branch, if applicable) sent to us. The README.md in the root directory should contain all the instructions on how to run your project.
 
-Just follow along the buttons on the page to look the weather at the Royal Palace in Stockholm. From start u see the weather for the current date but u can have a look at up to 9 days future weather forecast.
+- Just follow along the buttons on the page to look the weather at the Royal Palace in Stockholm. From start u see the weather for the current date but u can have a look at up to 9 days future weather forecast.
+
+- To start the backend u need to go to path /c/Front End/Egna Programmerings Projekt/WeatherApp/weather-app/Backend and write in the terminal: nodemon server.js.
+
+- Bugs or shortcomings in the code: - The buttons for shifting days works fine until u update the page or bookmark it and go to that page again, then they are reset and is displayed in not always the correct date. Also it makes it possible to continue to date´s that is not availible to find correct weather for.
+
+- Is there anything I would have done different with this project?
+- I would not have spend alot of time and energy trying to solve the date issues with my own solutions, i should have earlier have started to look for librarys to help me with the most difficult assignments. For example: How to get the correct hour and days so I could use that data. Im using a method called closeTo() and that problem i struggled alot with trying to solve with a own solution.
+  -I am using alot of code in both the App.js and Forecast.js files, with more time and energy i would have created a new function that i could have used in both these two files.
+- Of course my design can be improved alot, it is maybe my biggest weakness as a frontend developer.
 
 # Getting Started with Create React App
 

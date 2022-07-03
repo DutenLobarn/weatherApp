@@ -7,25 +7,25 @@ import { addDays, addHours, closestTo, formatISO } from "date-fns";
 import axios from "axios";
 
 function App() {
-  const [data, setData] = useState();
+  const [weatherData, setWeatherData] = useState();
   const [date, setDate] = useState();
   const [changeDate, setChangeDate] = useState(0);
   const [celsius, setCelsius] = useState();
   const [precipitationCategory, setPrecipitationCategory] = useState();
 
-  const url =
-    "https://opendata-download-metfcst.smhi.se/api/category/pmp3g/version/2/geotype/point/lon/18.072588/lat/59.327076/data.json";
+  const url = "http://localhost:9000";
 
   useEffect(() => {
+    // axios is not necessary but i wanted to try it out, a fetch() would just be fine to use.
     axios
       .get(url)
       .then((response) => {
-        setData(response.data);
+        setWeatherData(response.data);
 
         let currentDate = new Date(response.data.timeSeries[0].validTime);
 
         let currentDateCorrectHour = addHours(currentDate, -1);
-
+        // I´m changing the data depending on what button the user is clicking.
         let currentDateCorrectHourAfterChangeDate = addDays(
           currentDateCorrectHour,
           changeDate
@@ -34,7 +34,7 @@ function App() {
         let validTimeArray = response.data.timeSeries.map(
           (e) => new Date(currentDateCorrectHourAfterChangeDate)
         );
-
+        // Beacause not every date from the API data has weather for every hour i need to loop throw the data and pick out the closest data that is for the moment choosen by the user.
         let chooseCorrectValidTime = closestTo(
           currentDateCorrectHourAfterChangeDate,
           validTimeArray
@@ -45,7 +45,7 @@ function App() {
         let filteredValidTime = response.data.timeSeries.filter(
           (e) => e.validTime.substring(0, 13) === date
         );
-
+        // As mentioned earlier not all dates have every hour available then i use this "backup variable" and there i am not as strict to collect data because I am not including hours in my filter.
         let filteredValidTimeBackup = response.data.timeSeries.filter(
           (e) => e.validTime.substring(0, 10) === date.substring(0, 10)
         );
@@ -88,7 +88,7 @@ function App() {
         path="/dates/:yyyyMMddTHH"
         element={
           <Forecast
-            data={data}
+            weatherData={weatherData}
             celsius={celsius}
             setCelsius={setCelsius}
             precipitationCategory={precipitationCategory}

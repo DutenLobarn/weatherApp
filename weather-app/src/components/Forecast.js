@@ -13,7 +13,7 @@ import {
 } from "weather-icons-react";
 
 export default function Forecast({
-  data,
+  weatherData,
   celsius,
   setCelsius,
   precipitationCategory,
@@ -25,20 +25,20 @@ export default function Forecast({
 
   let urlDate = new Date(yyyyMMddTHH);
 
-  if (data) {
-    let validTimeArray = data.timeSeries.map((e) => new Date(urlDate));
+  if (weatherData) {
+    let validTimeArray = weatherData.timeSeries.map((e) => new Date(urlDate));
 
     let chooseCorrectValidTime = closestTo(urlDate, validTimeArray);
 
     let formatedChooseCorrectValidTime = formatISO(chooseCorrectValidTime);
 
-    let filteredValidTime = data.timeSeries.filter(
+    let filteredValidTime = weatherData.timeSeries.filter(
       (e) =>
         e.validTime.substring(0, 13) ===
         formatedChooseCorrectValidTime.substring(0, 13)
     );
 
-    let filteredValidTimeBackup = data.timeSeries.filter(
+    let filteredValidTimeBackup = weatherData.timeSeries.filter(
       (e) =>
         e.validTime.substring(0, 10) ===
         formatedChooseCorrectValidTime.substring(0, 10)
@@ -76,8 +76,9 @@ export default function Forecast({
   let previousUrlDate2;
   let followingUrlDate2;
 
-  const result = isValid(urlDate);
-  if (result) {
+  const isDateValid = isValid(urlDate);
+
+  if (isDateValid) {
     previousUrlDate = addDays(urlDate, -1);
     followingUrlDate = addDays(urlDate, 1);
 
